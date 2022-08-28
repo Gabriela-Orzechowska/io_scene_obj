@@ -420,11 +420,10 @@ def write_file(filepath, objects, depsgraph, scene,
 
                         if EXPORT_BLEN_OBS or EXPORT_GROUP_BY_OB:
                             name1 = ob.name
-                            name2 = ob.data.name
-                            if name1 == name2:
-                                obnamestring = name_compat(name1)
+                            if name1[-3:].isnumeric() and name1[-4] == '.':
+                                obnamestring = name_compat(name1[:-4])
                             else:
-                                obnamestring = '%s_%s' % (name_compat(name1), name_compat(name2))
+                                obnamestring = name_compat(name1)
 
                             if EXPORT_BLEN_OBS:
                                 fw('o %s\n' % obnamestring)  # Write Object name
